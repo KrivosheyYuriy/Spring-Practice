@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <title th:text="|${title}|"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+
+<body>
+<header th:insert="blocks/header::header"> <--- вставка блока ---> </header>
+<main>
+    <h1 class="text-center" style="background-color: silver;">О проделанной работе</h1>
+    <div class="mx-5">
+        <h3 class="mb-3">В ходе создания пробного сервиса я:</h3>
+        <ol class="list-group list-group-numbered">
+
+            <li class="list-group-item list-group-item-primary col-3 rounded">
+                Научился работать с СУБД Postgresql</li>
+
+            <div class="list-group">
+                <label class="list-group-item border border-0">
+                    <input class="form-check-input me-1" type="checkbox" value="" checked="" disabled="">
+                    Научился работать с pgAdmin4
+                </label>
+
+                <label class="list-group-item border border-0">
+                    <input class="form-check-input me-1" type="checkbox" value="" checked="" disabled="">
+                    Научился создавать пользователя и выдавать ему права доступа к базе данных
+                </label>
+
+                <label class="list-group-item border border-0">
+                    <input class="form-check-input me-1" type="checkbox" value="" checked="" disabled="">
+                    Научился подключать базу данных к проекту
+                </label>
+
+                <label class="list-group-item border border-0">
+                    <input class="form-check-input me-1" type="checkbox" value="" checked="" disabled="">
+                    Дополнительно рассмотрел построение отношений между таблицами
+                </label>
+            </div>
+
+            <li class="list-group-item list-group-item-success col-4 rounded">
+                Освоил основы фреймворка Spring boot и Thymeleaf</li>
+
+            <div class="list-group">
+                <label class="list-group-item border border-0">
+                    <input class="form-check-input me-1" type="checkbox" value="" checked="" disabled="">
+                    Научился создавать проекты и подключать дополнительные зависимости
+                </label>
+
+                <label class="list-group-item border border-0">
+                    <input class="form-check-input me-1" type="checkbox" value="" checked="" disabled="">
+                    Освоил вставку данных с помощью шаблонизатора Thymeleaf
+                </label>
+
+                <label class="list-group-item border border-0">
+                    <input class="form-check-input me-1" type="checkbox" value="" checked="" disabled="">
+                    Освоил фильтрацию данных при помощи средств Spring
+                </label>
+
+                <label class="list-group-item border border-0">
+                    <input class="form-check-input me-1" type="checkbox" value="" checked="" disabled="">
+                    Научился работать с сущностями, контролерами и GET/POST запросами
+                </label>
+
+                <label class="list-group-item border border-0">
+                    <input class="form-check-input me-1" type="checkbox" value="" checked="" disabled="">
+                    Создал мини-сервис, который позволяет производить различные действия с таблицей из БД
+                </label>
+            </div>
+
+            <li class="list-group-item list-group-item-warning col-5 rounded">
+                Закрепил на практике работу с классами базовой библиотеки java</li>
+
+            <div class="list-group">
+                <label class="list-group-item border border-0">
+                    <input class="form-check-input me-1" type="checkbox" value="" checked="" disabled="">
+                    Сделал класс Counter, который удобно использовать для нумерации элементов таблицы
+                </label>
+
+                <label class="list-group-item border border-0">
+                    <input class="form-check-input me-1" type="checkbox" value="" checked="" disabled="">
+                    Создал клас DataProcessor, в котором можно писать различные методы для обработки данных
+                </label>
+
+                <label class="list-group-item border border-0">
+                    <input class="form-check-input me-1" type="checkbox" value="" checked="" disabled="">
+                    Применил модуль для работы с датой, который использовал для гибких
+                    ограничений выбора даты рождения
+                </label>
+            </div>
+
+            <li class="list-group-item list-group-item-danger col-6 rounded">
+                Вспомнил основы HTML и CSS, изучил значения некоторых классов Bootstrap</li>
+
+            <div class="list-group">
+                <label class="list-group-item border border-0">
+                    <input class="form-check-input me-1" type="checkbox" value="" checked="" disabled="">
+                    Применил готовые компоненты Bootstrap для разработки страниц сервиса
+                </label>
+
+                <label class="list-group-item border border-0">
+                    <input class="form-check-input me-1" type="checkbox" value="" checked="" disabled="">
+                    Освоил применение регулярных выражений и типов данных в полях ввода
+                </label>
+
+                <label class="list-group-item border border-0">
+                    <input class="form-check-input me-1" type="checkbox" value="" checked="" disabled="">
+                    Создал структуру в static для удобного хранения css, js файлов и изображений
+                </label>
+
+                <label class="list-group-item border border-0">
+                    <input class="form-check-input me-1" type="checkbox" value="" checked="" disabled="">
+                    Сделал прикольный крутящийся при наведении логотип
+                </label>
+            </div>
+
+        </ol>
+    </div>
+</main>
+<footer th:insert="blocks/footer::footer"> <--- вставка блока ---> </footer>
+</body>
+
+</html>

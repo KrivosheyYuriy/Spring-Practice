@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <title th:text="|${title}|"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+
+<body>
+<header th:insert="blocks/header::header"> <--- вставка блока ---> </header>
+<main>
+    <div class="container d-flex justify-content-center">
+        <form method="post" action="filter">
+            <input type="text" name="FIO" class="" placeholder="Иванов Иван Иванович" aria-label="Search">
+            <button type="submit" class="btn btn-outline-primary me-2">Отсортировать</button>
+        </form>
+    </div>
+
+    <div class="bd-example mt-3 mx-4">
+        <table class="table table-success table-striped">
+            <thead>
+            <tr>
+                <th scope="col">№</th>
+                <th scope="col">Фамилия</th>
+                <th scope="col">Имя</th>
+                <th scope="col">Отчество</th>
+                <th scope="col">Дата рождения</th>
+                <th scope="col">Должность</th>
+                <th scope="col">Факультет</th>
+                <th scope="col">Телефон</th>
+                <th scope="col">Почта</th>
+            </tr>
+            </thead>
+            <tbody th:with="myCounter = ${counter.get()}" th:each="per: ${persons}">
+            <tr th:with="mycounter=${counter.incrementAndGet()}">
+                <th scope="row" th:text="${myCounter}"></th>
+                <td th:text="${per.surname}"></td>
+                <td th:text="${per.name}"></td>
+                <td th:text="${per.fatherName}"></td>
+                <td th:text="${per.birthday}"></td>
+                <td th:text="${per.role}"></td>
+                <td th:text="${per.department}"></td>
+                <td th:text="${per.phoneNumber}"></td>
+                <td th:text="${per.email}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</main>
+<footer th:insert="blocks/footer::footer"> <--- вставка блока ---> </footer>
+</body>
+
+</html>
