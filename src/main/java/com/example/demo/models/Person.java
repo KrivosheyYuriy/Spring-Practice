@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 public class Person {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     private String surname;
     private String name;
@@ -35,6 +35,10 @@ public class Person {
         this.email = email;
         this.role = role;
         this.department = department;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getSurname() {

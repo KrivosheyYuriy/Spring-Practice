@@ -4,7 +4,9 @@ import com.example.demo.controllers.java.Counter;
 import com.example.demo.controllers.java.DataProcessor;
 import com.example.demo.models.Person;
 import com.example.demo.repo.PersonRepo;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -39,10 +41,18 @@ public class PrimeController {
         return "about";
     }
 
-    @GetMapping("/deletePerson")
-    public String deletePerson(@RequestParam (value = "id") Long id) {
-        personRepo.deleteById(id);
-        return "redirect:/";
+    @GetMapping("/person/{id}")
+    public String getPerson(@PathVariable Long id, Model model) {
+        Person person = personRepo.findById(id).orElse(null);
+        if (person == null) {
+            model.addAttribute("title", "Человек не найден");
+        } else {
+            model.addAttribute("title", "Человек найден");
+            model.addAttribute("persons", new Person[]{person});
+        }
+        // передаем данные для страницы
+        model.addAttribute("counter", new Counter());
+        return "home";
     }
 
     @PostMapping("/filter")
@@ -58,13 +68,11 @@ public class PrimeController {
                 persons = personRepo.findBySurname(data[0]);
                 persons.addAll(personRepo.findByName(data[0])); // если один аргумент (любой)
                 persons.addAll(personRepo.findByFatherName(data[0]));
-            }
-            else if (data.length == 2) {
+            } else if (data.length == 2) {
                 persons = personRepo.findBySurnameAndName(data[0], data[1]);
                 persons.addAll(personRepo.findBySurnameAndFatherName(data[0], data[1])); // если два любых аргумента
                 persons.addAll(personRepo.findByNameAndFatherName(data[0], data[1]));
-            }
-            else if (data.length == 3) {
+            } else if (data.length == 3) {
                 persons = personRepo.findBySurnameAndNameAndFatherName(data[0],
                         data[1], data[2]); // если 3 аргумента ФИО
             }
@@ -78,9 +86,9 @@ public class PrimeController {
 
     @PostMapping("/addPerson")
     public String addPostPerson(@RequestParam String surname, @RequestParam String name,
-                              @RequestParam String fatherName, @RequestParam String birthday,
-                              @RequestParam String phone, @RequestParam String email,
-                              @RequestParam String role, @RequestParam String department) {
+                                @RequestParam String fatherName, @RequestParam String birthday,
+                                @RequestParam String phone, @RequestParam String email,
+                                @RequestParam String role, @RequestParam String department) {
 
         String proSurname = DataProcessor.capitalize(surname, "-");
         String proName = DataProcessor.capitalize(name, " ");// обработка корректности регистра
@@ -91,4 +99,40 @@ public class PrimeController {
         return "redirect:/";
     }
 
+    @DeleteMapping("/person/{id}")
+    @ResponseBody
+    public void deletePerson(@PathVariable("id") Long id) {
+        personRepo.deleteById(id);
+    }
+
+    @PutMapping("/person")
+    @ResponseBody
+    public void updatePersonData(@RequestBody Person person) {
+        if (personRepo.findById(person.getId()).isPresent()) {
+            Person original = personRepo.findById(person.getId()).get();
+            if (!person.getSurname().isEmpty()) {
+                original.setSurname(person.getSurname());
+            }
+            if (!person.getName().isEmpty()) {
+                original.setName(person.getName());
+            }
+            original.setFatherName(person.getFatherName());
+            if (!person.getBirthday().isEmpty()) {
+                original.setBirthday(person.getBirthday());
+            }
+            if (!person.getPhoneNumber().isEmpty()) {
+                original.setPhoneNumber(person.getPhoneNumber());
+            }
+            if (!person.getEmail().isEmpty()) {
+                original.setEmail(person.getEmail());
+            }
+            if (!person.getRole().isEmpty()) {
+                original.setRole(person.getRole());
+            }
+            if (!person.getDepartment().isEmpty()) {
+                original.setDepartment(person.getDepartment());
+            }
+            personRepo.save(original);
+        }
+    }
 }
