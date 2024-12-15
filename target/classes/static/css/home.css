@@ -1,9 +1,0 @@
-@keyframes spin {
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-.logo:hover {
-    animation: spin 2s infinite;
-}
