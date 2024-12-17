@@ -1,4 +1,4 @@
 FROM openjdk:latest
-#COPY /target/<name>-<version>.jar
+COPY ./target/app.jar app.jar
 
-ENTRYPOINT ["java", "-jar", "<name>-<version>.jar"]
+CMD ["java", "-jar", "app.jar"]
